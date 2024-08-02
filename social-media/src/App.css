@@ -1,0 +1,13 @@
+.sideBar{
+ display: flex;
+
+}
+
+.rightBar{
+    display: flex;
+    padding: 20px;
+    flex-wrap: wrap;
+    width: 1235px;
+
+}
+
