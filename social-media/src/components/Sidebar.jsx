@@ -3,7 +3,12 @@ const Sidebar = ({ sidebar, setSidebar }) => {
     <>
       <div
         className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark"
-        style={{ width: "280px", minHeight: "667px" , position: "fixed", marginTop: "20px" }}
+        style={{
+          width: "280px",
+          minHeight: "667px",
+          position: "fixed",
+          marginTop: "20px",
+        }}
       >
         <a
           href="/"
@@ -41,6 +46,19 @@ const Sidebar = ({ sidebar, setSidebar }) => {
                 <use xlinkHref="#speedometer2"></use>
               </svg>
               Create Post
+            </a>
+          </li>
+          <li onClick={() => setSidebar("YourPost")}>
+            <a
+              href="#"
+              className={`nav-link text-white ${
+                sidebar === "YourPost" ? "active" : ""
+              }`}
+            >
+              <svg className="bi pe-none me-2" width="16" height="16">
+                <use xlinkHref="#speedometer2"></use>
+              </svg>
+              Your Posts
             </a>
           </li>
         </ul>

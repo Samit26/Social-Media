@@ -1,4 +1,5 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useReducer } from "react";
+import toast from "react-hot-toast";
 const POST_DATA = [
   {
     id: "12",
@@ -84,6 +85,7 @@ const postListReducer = (currPost, action) => {
 
   if (action.type === "DELETE_POST") {
     newListPost = currPost.filter((post) => post.id !== action.payload.id);
+    toast.success("Your Post has been deleted successfully");
     return newListPost;
   }
 
@@ -95,6 +97,12 @@ const postListReducer = (currPost, action) => {
     );
   }
 
+  if (action.type === "ADD_POST") {
+    let newPost = [action.payload, ...currPost];
+    console.log(newPost);
+    return newPost;
+  }
+
   if (action.type === "UNLIKED_POST") {
     return currPost.map((post) =>
       post.id === action.payload.id
@@ -104,10 +112,24 @@ const postListReducer = (currPost, action) => {
   }
 };
 
+// eslint-disable-next-line react/prop-types
 const PostListProvider = ({ children }) => {
   const [postList, dispatchPostList] = useReducer(postListReducer, POST_DATA);
 
-  const addPost = () => {};
+  const addPost = (imageUrl, tags, body, title) => {
+    dispatchPostList({
+      type: "ADD_POST",
+      payload: {
+        id: Date.now(),
+        tags,
+        body,
+        title,
+        imageUrl,
+        reactions: 0,
+        userId: "user_9",
+      },
+    });
+  };
 
   const likeBtnPress = (like, id) => {
     console.log("btnpreseed" + id);

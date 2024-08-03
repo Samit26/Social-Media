@@ -6,8 +6,8 @@ import { FcLike } from "react-icons/fc";
 import { FaRegHeart } from "react-icons/fa";
 
 // eslint-disable-next-line react/prop-types
-const Post = ({ post }) => {
-  const { likeBtnPress } = useContext(PostList);
+const YourPostAre = ({ post }) => {
+  const { likeBtnPress, deletePost } = useContext(PostList);
   const [value1, setValue1] = useState("Clicked");
   const likeBtn1 = (value) => {
     value === "Clicked" ? setValue1("Not Clicked") : setValue1("Clicked");
@@ -26,10 +26,11 @@ const Post = ({ post }) => {
 
   return (
     <>
-      <div className={styles["card-1"]}>
+      <div className={styles["card-1"]} style={{ height: "480px" }}>
         <div className={styles["card-header-1"]}>
           <img src={post.imageUrl} alt={limitedTitle} />
         </div>
+
         <div className={styles["card-body-1"]}>
           <div className={styles["tags-container"]}>
             {post.tags.map((tag) => (
@@ -74,10 +75,22 @@ const Post = ({ post }) => {
               )}
             </div>
           </div>
+          <div
+            className="d-flex justify-content-center ms-2"
+            style={{ width: "240px" }}
+          >
+            <button
+              type="button"
+              className="btn btn-danger mt-3 "
+              onClick={() => deletePost(post.id)}
+            >
+              Delete Post
+            </button>
+          </div>
         </div>
       </div>
     </>
   );
 };
 
-export default Post;
+export default YourPostAre;
